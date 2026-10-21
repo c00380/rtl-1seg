@@ -1,0 +1,52 @@
+/* BML画面の外枠。受信したBMLページ内のスタイルには適用しない。 */
+@import url('./ui-tokens.css');
+@import url('./ui-common.css');
+html,
+body {
+  margin: 0;
+  background: var(--rx-bg);
+  overflow-x: hidden;
+  color: var(--rx-text);
+}
+#page {
+  position: relative;
+  margin: 0 auto;
+}
+#bml {
+  transform-origin: top left;
+  width: 240px;
+  height: 480px;
+}
+body > #input {
+  position: fixed;
+  top: 110px;
+  left: 8px;
+  right: 8px;
+  z-index: 10;
+  padding: 12px;
+  background: var(--rx-panel-2);
+  border: 1px solid var(--rx-accent);
+  border-radius: var(--rx-radius-control);
+  color-scheme: dark;
+  font: var(--rx-font-body) var(--rx-font-ui);
+}
+body > #input input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px;
+  border: 1px solid var(--rx-line);
+  border-radius: var(--rx-radius-control);
+  color: var(--rx-text);
+  background: var(--rx-bg);
+  font: inherit;
+}
+body > #input button {
+  padding: 8px 16px;
+  font: inherit;
+  cursor: pointer;
+}
+body > #input button + button {
+  margin-left: 8px;
+}

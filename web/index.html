@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title data-message="common.appTitle"></title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="rx-startup" id="app-startup">
+    <h1><!--message:common.appTitle--></h1>
+    <p id="app-startup-status" role="status"><!--message:app.starting--></p>
+    <button type="button" id="app-startup-retry" hidden><!--message:page.reload--></button>
+  </main>
+  <div class="rx-app is-reception-stopped" id="rx-cinema" data-message-aria-label="page.application" hidden inert>
+    <header class="rx-top">
+      <div class="rx-top-clock" data-receiver="clockInformation"></div>
+      <div class="rx-top-center" data-receiver="headerInformation"></div>
+      <div class="rx-top-actions">
+        <div class="rx-live"><span class="rx-pulse"></span><span id="cinema-lock"><!--message:common.stopped--></span></div>
+        <button type="button" class="rx-primary rx-reception-button is-stopped"><!--message:common.startReception--></button>
+      </div>
+    </header>
+    <main class="rx-body">
+      <section class="rx-stage">
+        <div class="rx-workspace">
+          <div class="rx-media-shell">
+            <div id="screen" class="rx-video" data-receiver="video" data-message-aria-label="page.videoLabel">
+              <canvas id="cv" width="320" height="180"></canvas><canvas id="captions" width="320" height="180" data-message-aria-label="page.captionLabel" hidden></canvas><div id="no-signal" class="rx-video-placeholder" data-receiver="videoPlaceholder">No Signal</div>
+              <div class="rx-recording-status" aria-live="polite">REC <span class="rx-recording-time" data-receiver="recordingTime">00:00</span></div>
+              <div class="rx-video-tools"><button type="button" class="rx-icon rx-record-button" data-message-aria-label="common.startRecording" aria-pressed="false"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="1"/></svg></button><button type="button" class="rx-icon rx-volume-button" data-message-aria-label="common.mute" aria-pressed="false"><svg class="lucide rx-volume-on" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 5-6 4H2v6h3l6 4V5m4 3a5 5 0 0 1 0 8m3-11a9 9 0 0 1 0 14"/></svg><svg class="lucide rx-volume-off" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 5-6 4H2v6h3l6 4V5m6 4 5 6m0-6-5 6"/></svg></button><input class="rx-volume-slider" type="range" min="0" max="100" value="100" data-message-aria-label="page.volume"><span class="rx-spacer"></span><button type="button" class="rx-icon rx-pip-button" data-message-aria-label="common.pictureInPicture" aria-pressed="false" hidden disabled><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><rect x="12" y="12" width="7" height="6" rx="1"/></svg></button><button type="button" class="rx-icon rx-fullscreen-button" data-message-aria-label="common.fullscreen"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m8 0h3a2 2 0 0 0 2-2v-3"/></svg></button></div>
+            </div>
+            <section class="rx-log-panel" id="receiver-log" data-message-aria-label="page.log" aria-hidden="true" inert><div class="rx-panel-head"><h2 class="rx-panel-title"><!--message:page.log--></h2><button type="button" class="rx-icon rx-log-close" data-message-aria-label="page.closeLog"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"/></svg></button></div><ul class="rx-log-list" data-receiver="logs"></ul></section>
+          </div>
+          <aside class="rx-side" id="rx-details-drawer" data-message-aria-label="common.overview" aria-hidden="true" inert>
+            <section class="rx-program-panel" data-drawer-panel="program">
+              <div class="rx-panel-head"><h2 class="rx-panel-title"><!--message:common.overview--></h2><button type="button" class="rx-icon rx-drawer-close" data-message-aria-label="page.closeOverview"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"/></svg></button></div>
+              <div data-receiver="programInformation" hidden></div>
+              <button type="button" class="rx-action rx-overview-detail-button"><!--message:page.receptionDetails--></button>
+            </section>
+            <section class="rx-data-panel" data-drawer-panel="data" hidden>
+              <div class="rx-panel-head"><h2 class="rx-panel-title"><!--message:common.data--></h2><button type="button" class="rx-icon rx-drawer-close" data-message-aria-label="page.closeData"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"/></svg></button></div>
+              <p class="rx-data-status" data-data-status role="status"><!--message:data.waiting--></p>
+              <div class="rx-data-screen" tabindex="0" data-message-aria-label="page.dataScreen"></div>
+              <div class="rx-data-remote" role="group" data-message-aria-label="page.dataRemote">
+                <div class="rx-data-directions"><button type="button" data-bml-key="1" data-message-aria-label="page.up">↑</button><button type="button" data-bml-key="3" data-message-aria-label="page.left">←</button><button type="button" data-bml-key="18"><!--message:page.confirm--></button><button type="button" data-bml-key="4" data-message-aria-label="page.right">→</button><button type="button" data-bml-key="2" data-message-aria-label="page.down">↓</button></div>
+                <div class="rx-data-actions"><button type="button" data-bml-key="19"><!--message:page.back--></button><button type="button" data-bml-key="20">D</button><button type="button" data-data-reload><!--message:page.reload--></button></div>
+                <details class="rx-data-extra"><summary><!--message:page.extraKeys--></summary><div class="rx-data-colors"><button type="button" data-bml-key="21" data-color="blue"><!--message:page.blue--></button><button type="button" data-bml-key="22" data-color="red"><!--message:page.red--></button><button type="button" data-bml-key="23" data-color="green"><!--message:page.green--></button><button type="button" data-bml-key="24" data-color="yellow"><!--message:page.yellow--></button></div>
+                <div class="rx-data-numbers"><button type="button" data-bml-key="6">1</button><button type="button" data-bml-key="7">2</button><button type="button" data-bml-key="8">3</button><button type="button" data-bml-key="9">4</button><button type="button" data-bml-key="10">5</button><button type="button" data-bml-key="11">6</button><button type="button" data-bml-key="12">7</button><button type="button" data-bml-key="13">8</button><button type="button" data-bml-key="14">9</button><button type="button" data-bml-key="101">＊</button><button type="button" data-bml-key="5">0</button><button type="button" data-bml-key="102">＃</button></div></details>
+              </div>
+              <p class="rx-data-note"><!--message:page.dataNote--></p>
+            </section>
+            <section class="rx-settings-panel" data-drawer-panel="settings" hidden>
+              <div class="rx-panel-head"><h2 class="rx-panel-title"><!--message:common.settings--></h2><button type="button" class="rx-icon rx-drawer-close" data-message-aria-label="page.closeSettings"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"/></svg></button></div>
+              <div class="rx-settings-picker" data-dropdown="source">
+                <button type="button" class="rx-select-button" data-message-aria-label="page.chooseInput" aria-haspopup="listbox" aria-expanded="false" aria-controls="input-source-menu"><span class="rx-label"><!--message:page.input--></span><strong class="rx-select-value"></strong><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+                <div class="rx-select-menu" id="input-source-menu" role="listbox" data-message-aria-label="page.input" hidden></div>
+              </div>
+              <div id="iq-file-settings" class="rx-iq-file-settings" hidden>
+                <div class="rx-iq-actions"><button type="button" class="rx-action" id="iq-open"><!--message:page.chooseIqFile--></button><p id="iq-file-status" class="rx-setting-note" role="status"><!--message:page.noFile--></p></div>
+                <input type="file" id="iq-file" hidden>
+                <div class="rx-settings-picker" data-dropdown="iq-format">
+                  <button type="button" class="rx-select-button" data-message-aria-label="page.chooseIqFormat" aria-haspopup="listbox" aria-expanded="false" aria-controls="iq-format-menu"><span class="rx-label"><!--message:page.iqFormat--></span><strong class="rx-select-value"></strong><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+                  <div class="rx-select-menu" id="iq-format-menu" role="listbox" data-message-aria-label="page.iqFileFormat" hidden></div>
+                </div>
+                <label class="rx-iq-rate"><span class="rx-label"><!--message:page.sampleRate--></span><input id="iq-sample-rate" type="number" min="1" step="any" value="2000000" required></label>
+              </div>
+              <div class="rx-settings-picker" data-dropdown="tuner">
+                <button type="button" class="rx-select-button" data-message-aria-label="page.choosePhysicalChannel" aria-haspopup="listbox" aria-expanded="false" aria-controls="physical-channel-menu" disabled><span class="rx-label"><!--message:page.frequency--></span><strong class="rx-select-value"></strong><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+                <div class="rx-select-menu" id="physical-channel-menu" data-receiver="channelOptions" role="listbox" data-message-aria-label="page.physicalChannel" hidden></div>
+              </div>
+              <div class="rx-settings-picker" data-dropdown="gain">
+                <button type="button" class="rx-select-button" aria-haspopup="listbox" aria-expanded="false" aria-controls="gain-menu" disabled><span class="rx-label"><!--message:page.gain--></span><strong class="rx-select-value"></strong><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+                <div class="rx-select-menu" id="gain-menu" data-receiver="gainOptions" role="listbox" data-message-aria-label="page.gain" hidden></div>
+              </div>
+              <div class="rx-settings-divider" role="separator"></div>
+              <div class="rx-settings-picker" data-dropdown="audio">
+                <button type="button" class="rx-select-button" aria-haspopup="listbox" aria-expanded="false" aria-controls="audio-menu" disabled><span class="rx-label"><!--message:page.audio--></span><strong class="rx-select-value"></strong><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+                <div class="rx-select-menu" id="audio-menu" data-receiver="audioOptions" role="listbox" data-message-aria-label="page.audio" hidden></div>
+              </div>
+              <div class="rx-settings-picker" data-dropdown="audio-dual">
+                <button type="button" class="rx-select-button" aria-haspopup="listbox" aria-expanded="false" aria-controls="audio-dual-menu" disabled><span class="rx-label"><!--message:broadcast.dualAudio--></span><strong class="rx-select-value"></strong><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+                <div class="rx-select-menu" id="audio-dual-menu" data-receiver="audioDualOptions" role="listbox" data-message-aria-label="broadcast.dualAudio" hidden></div>
+              </div>
+              <div class="rx-settings-divider" role="separator"></div>
+              <div class="rx-settings-picker" data-dropdown="recording-format">
+                <button type="button" class="rx-select-button" aria-haspopup="listbox" aria-expanded="false" aria-controls="recording-format-menu"><span class="rx-label"><!--message:page.recordingFormat--></span><strong class="rx-select-value"></strong><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+                <div class="rx-select-menu" id="recording-format-menu" role="listbox" data-message-aria-label="page.recordingFormat" hidden></div>
+              </div>
+              <div class="rx-settings-picker">
+                <label class="rx-setting-check"><input type="checkbox" class="rx-caption-check" disabled><span><!--message:page.captions--></span></label>
+              </div>
+              <div class="rx-settings-picker">
+                <label class="rx-setting-check"><input type="checkbox" class="rx-nhk-check" checked><span><!--message:page.receiveNhk--></span></label>
+                <p class="rx-setting-note"><!--message:page.nhkNote--></p>
+              </div>
+            </section>
+          </aside>
+          <nav class="rx-channels" data-message-aria-label="page.channels">
+            <div class="rx-rail-tools">
+              <button type="button" class="rx-icon rx-drawer-toggle" data-message-aria-label="page.openOverview" aria-controls="rx-details-drawer" aria-expanded="false"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8m-8 4h8m-8-8h2"/></svg></button>
+              <button type="button" class="rx-icon rx-settings-toggle" data-message-aria-label="page.openSettings" aria-controls="rx-details-drawer" aria-expanded="false"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4h-7M10 4H3m18 8H10m-4 0H3m18 8h-3m-4 0H3M14 2v4M6 10v4m12 4v4"/></svg></button>
+              <button type="button" class="rx-icon rx-data-button" data-message-aria-label="page.openData" aria-controls="rx-details-drawer" aria-expanded="false">D</button>
+            </div>
+            <div class="rx-remote-channels" data-receiver="remoteChannels" role="group" data-message-aria-label="page.remoteChannels">
+              <button type="button" class="rx-icon rx-channel-register" data-message-aria-label="common.scanChannels" data-message-data-tooltip="common.scanChannels"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/><path d="M12 7v6M9 10h6"/></svg></button>
+            </div>
+            <div class="rx-log-slot"><div class="rx-signal-meter" data-receiver="snrMeter" role="meter" data-message-aria-label="page.inputLevel" aria-valuemin="-60" aria-valuemax="0" data-message-aria-valuetext="page.unavailable"><span><!--message:page.input--></span><span class="rx-signal-track"><span class="rx-signal-fill" data-receiver="snrFill"></span></span><span data-receiver="snr"></span></div><button type="button" class="rx-icon rx-transmit-button" data-message-aria-label="page.generateFile" aria-haspopup="dialog" aria-controls="transmit-dialog" data-message-data-tooltip="page.generateFile"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M12 18v-7m-3 3 3-3 3 3"/></svg></button><button type="button" class="rx-icon rx-constellation-toggle" data-message-aria-label="page.showMonitor" aria-controls="constellation-popup" aria-expanded="false" disabled><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 21 4-9 4 9M9 18h6M5 16a10 10 0 0 1 0-14m14 0a10 10 0 0 1 0 14M8 13a6 6 0 0 1 0-8m8 0a6 6 0 0 1 0 8"/><circle cx="12" cy="9" r="2"/></svg></button><button type="button" class="rx-icon rx-log-toggle" data-message-aria-label="page.showLog" aria-controls="receiver-log" aria-expanded="false"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 0 1-4 0V5a2 2 0 0 0-4 0v2h4M4 3h14a2 2 0 0 1 2 2v12M10 8h6m-6 4h6"/></svg></button></div>
+          </nav>
+        </div>
+      </section>
+    </main>
+    <aside class="rx-constellation-popup" id="constellation-popup" data-message-aria-label="page.monitor" hidden>
+      <header class="rx-constellation-head"><h2 class="rx-panel-title"><!--message:page.monitor--></h2><button type="button" class="rx-icon rx-constellation-close" data-message-aria-label="page.closeMonitor"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"/></svg></button></header>
+      <div class="rx-monitor-body">
+      <div class="rx-monitor-graph">
+        <h3><!--message:page.spectrum--> <span>dBFS/Hz</span></h3>
+        <svg class="rx-spectrum-plot" viewBox="0 0 328 146" role="img" data-message-aria-label="page.spectrum">
+          <rect class="rx-spectrum-band" data-receiver="spectrumBand" x="116" y="12" width="116" height="100" visibility="hidden"/>
+          <path class="rx-constellation-grid" d="M36 12H312M36 62H312M36 112H312M174 12V112"/>
+          <path class="rx-constellation-axis" d="M36 12V112H312"/>
+          <path class="rx-spectrum-line" data-receiver="spectrum"/>
+          <text class="rx-constellation-label" data-receiver="spectrumTop" x="31" y="16" text-anchor="end"></text>
+          <text class="rx-constellation-label" data-receiver="spectrumBottom" x="31" y="112" text-anchor="end"></text>
+          <text class="rx-constellation-label" data-receiver="spectrumLow" x="36" y="130"></text>
+          <text class="rx-constellation-label" x="174" y="130" text-anchor="middle">0</text>
+          <text class="rx-constellation-label" data-receiver="spectrumHigh" x="312" y="130" text-anchor="end"></text>
+          <text class="rx-constellation-label" x="312" y="143" text-anchor="end">kHz</text>
+        </svg>
+        <p class="rx-monitor-graph-note" data-receiver="spectrumStatus"></p>
+      </div>
+      <div class="rx-monitor-plots"><section>
+      <h3 class="rx-monitor-plot-title"><!--message:page.constellation--></h3>
+      <svg class="rx-constellation-plot" viewBox="0 0 220 220" role="img" data-message-aria-label="page.constellationDescription">
+        <path class="rx-constellation-grid" d="M40 20V200M75 20V200M145 20V200M180 20V200M20 40H200M20 75H200M20 145H200M20 180H200"/>
+        <path class="rx-constellation-axis" d="M110 16V204M16 110H204"/>
+        <g class="rx-constellation-point" data-receiver="constellation"></g>
+        <text class="rx-constellation-label" x="202" y="106">I</text><text class="rx-constellation-label" x="115" y="17">Q</text>
+      </svg>
+      <p class="rx-monitor-graph-note"><!--message:page.constellationCaption--></p>
+      </section><section>
+        <h3 class="rx-monitor-plot-title"><!--message:page.merHistory--></h3>
+        <svg class="rx-quality-plot" viewBox="0 0 170 170" role="img" data-message-aria-label="page.merDescription">
+          <path class="rx-constellation-grid" d="M24 16H152M24 70H152M24 124H152"/>
+          <path class="rx-constellation-axis" d="M24 16V124H152"/>
+          <text class="rx-constellation-label" data-receiver="qualityMaximum" x="19" y="20" text-anchor="end"></text>
+          <text class="rx-constellation-label" x="19" y="124" text-anchor="end">0</text>
+          <text class="rx-constellation-label" x="24" y="143"><!--message:page.thirtySecondsAgo--></text>
+          <text class="rx-constellation-label" x="152" y="143" text-anchor="end"><!--message:page.now--></text>
+          <path class="rx-spectrum-line" data-receiver="qualityHistory"/>
+          <circle class="rx-constellation-point" data-receiver="qualityPoint" r="2" visibility="hidden"/>
+        </svg>
+        <p class="rx-monitor-graph-note" data-receiver="qualityStatus"></p>
+      </section></div>
+      <div class="rx-constellation-details" id="constellation-details" data-receiver="receptionDetails" aria-hidden="true" inert hidden></div>
+      </div>
+      <button type="button" class="rx-icon rx-constellation-expand" data-message-aria-label="common.expandMonitor" aria-controls="constellation-details" aria-expanded="false"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+    </aside>
+    <div class="rx-toast-region" role="region" data-message-aria-label="page.notifications" aria-live="polite"></div>
+    <dialog class="rx-large-modal rx-transmit-modal" id="transmit-dialog" aria-labelledby="transmit-title">
+      <header class="rx-modal-head"><h2 class="rx-panel-title" id="transmit-title"><!--message:page.generateFile--></h2><button type="button" class="rx-icon" data-transmit-close data-message-aria-label="page.closeGeneration"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></header>
+      <div class="rx-modal-body">
+        <form id="transmit-form" class="rx-transmit-form">
+          <label class="rx-transmit-field"><!--message:page.video--><input id="transmit-video" type="file" accept="video/*,video/mp2t,.ts" required></label>
+          <div class="rx-transmit-fields"><label class="rx-transmit-field"><!--message:page.programName--><input id="transmit-program-name" type="text" maxlength="120"></label><label class="rx-transmit-field"><!--message:page.stationName--><input id="transmit-station-name" type="text" maxlength="120"></label></div>
+          <label class="rx-transmit-field"><!--message:page.description--><textarea id="transmit-description" rows="2" maxlength="500"></textarea></label>
+          <div class="rx-transmit-fields">
+            <div class="rx-transmit-field"><span><!--message:page.iqFormat--></span><div class="rx-transmit-picker" data-dropdown="transmit-format"><button type="button" class="rx-select-button" data-message-aria-label="page.chooseOutputFormat" aria-haspopup="listbox" aria-expanded="false" aria-controls="transmit-format-menu"><strong class="rx-select-value"></strong><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="rx-select-menu" id="transmit-format-menu" role="listbox" data-message-aria-label="page.iqFormat" hidden></div><select hidden id="transmit-format"><option value="s8">8-bit signed</option><option value="s16">16-bit signed</option><option value="f32">32-bit float</option></select></div></div>
+            <label class="rx-transmit-field"><!--message:page.sampleRate--><input id="transmit-rate" type="number" min="800000" max="20000000" step="any" value="2000000" required></label>
+            <div class="rx-transmit-field"><span><!--message:common.guard--></span><div class="rx-transmit-picker" data-dropdown="transmit-guard"><button type="button" class="rx-select-button" data-message-aria-label="page.chooseGuard" aria-haspopup="listbox" aria-expanded="false" aria-controls="transmit-guard-menu"><strong class="rx-select-value"></strong><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="rx-select-menu" id="transmit-guard-menu" role="listbox" data-message-aria-label="common.guard" hidden></div><select hidden id="transmit-guard"><option value="4">1/4</option><option value="8" selected>1/8</option><option value="16">1/16</option><option value="32">1/32</option></select></div></div>
+            <label class="rx-transmit-field"><!--message:common.amplitude--><input id="transmit-amplitude" type="number" min="0.0001" max="1" step="any" value="0.1" required></label>
+          </div>
+          <div class="rx-transmit-actions"><button class="rx-action" id="transmit-generate" type="submit"><!--message:page.generate--></button><button class="rx-action" id="transmit-cancel" type="button" disabled><!--message:page.cancel--></button></div>
+          <p id="transmit-status" role="status" aria-live="polite"><!--message:page.generationHint--></p>
+        </form>
+      </div>
+    </dialog>
+    <dialog class="rx-large-modal rx-overview-modal" aria-labelledby="overview-modal-title">
+      <header class="rx-modal-head"><h2 class="rx-panel-title" id="overview-modal-title"><!--message:page.receptionDetails--></h2><button type="button" class="rx-icon" data-close-modal data-message-aria-label="page.closeDetails"><svg class="lucide" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"/></svg></button></header>
+      <div class="rx-modal-body">
+        <div class="rx-detail-list rx-reception-information" data-receiver="receptionInformation"></div>
+      </div>
+    </dialog>
+  </div>
+
+<div hidden aria-hidden="true" id="receiver-controls">
+<select id="channel"></select><select id="gain"></select><select id="audio"></select><select id="audio-dual"></select>
+<select id="recording-format"><option value="ts">TS</option><option value="mp4">MP4</option></select>
+<select id="input-source"><option value="sdr">RTL-SDR</option><option value="file"><!--message:common.iqFile--></option></select>
+<select id="iq-format"><option value="s8">8-bit signed</option><option value="s16">16-bit signed</option><option value="f32">32-bit float</option></select>
+<button id="caption-toggle"></button><button id="usb"></button><button id="fullscreen"></button>
+<p id="message"></p>
+</div>
+<script type="module" src="./src/app/bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/pjkundert/ezpwd-reed-solomon",
+  "revision": "62a490c13f6e057fbf2dc6777fde234c7a19098e",
+  "sha256": {
+    "rs": "d8b745e5510f5c946eacd557fe42d8b0a33900fca416b9d62201b4665f28922e",
+    "rs_base": "00b3ea48cf485e20d9d978c00257af8190b95897eaa630a7dd713552b8360602"
+  }
+}

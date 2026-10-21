@@ -1,0 +1,62 @@
+{
+  "downloads": [
+    {
+      "name": "libfec-LICENSE",
+      "url": "https://raw.githubusercontent.com/quiet/libfec/9750ca0a6d0a786b506e44692776b541f90daa91/lesser.txt",
+      "sha256": "0b62e767be034b3fe9c6baea15592459ca7fa9fcf060e48b80a3b0b361b8288b",
+      "usage": "Viterbi WASM"
+    },
+    {
+      "name": "ezpwd-LICENSE",
+      "url": "https://raw.githubusercontent.com/pjkundert/ezpwd-reed-solomon/62a490c13f6e057fbf2dc6777fde234c7a19098e/LICENSE",
+      "sha256": "b50743b2c7f93c60b30f81955c04f94d08bded065700dd00333ffe53183af374",
+      "usage": "RS WASM"
+    },
+    {
+      "name": "ezpwd-COPYING",
+      "url": "https://raw.githubusercontent.com/pjkundert/ezpwd-reed-solomon/62a490c13f6e057fbf2dc6777fde234c7a19098e/COPYING",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "usage": "RS WASM / adapters"
+    },
+    {
+      "name": "ezpwd-COPYRIGHT",
+      "url": "https://raw.githubusercontent.com/pjkundert/ezpwd-reed-solomon/62a490c13f6e057fbf2dc6777fde234c7a19098e/COPYRIGHT",
+      "sha256": "316024689936c2c36426aa6a0cb4d8850368ca7188c5c18f23932defb8c0e164",
+      "usage": "RS attribution"
+    },
+    {
+      "name": "web-isdb-t-viewer-LICENSE",
+      "url": "https://raw.githubusercontent.com/e04/web-isdb-t-viewer/364e225810fb9c9cd55da3f5f1a03826a4b992f8/LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "usage": "Historical reference; no runtime dependency"
+    },
+    {
+      "name": "server/polka-url-LICENSE",
+      "package": "@polka/url",
+      "version": "1.0.0-next.29",
+      "url": "https://raw.githubusercontent.com/lukeed/polka/02cbdb529ddca0a9f3d225e2abb2931924219cc3/license",
+      "sha256": "ba573393f24555ac0528612ad39665fab5bdcc80330a61096024bbf5f736526d",
+      "usage": "Server dependency"
+    },
+    {
+      "name": "server/sirv-LICENSE",
+      "package": "sirv",
+      "version": "3.0.2",
+      "url": "https://raw.githubusercontent.com/lukeed/sirv/1135207e92c40354543cbd15c763c7a61d79d432/license",
+      "sha256": "ba573393f24555ac0528612ad39665fab5bdcc80330a61096024bbf5f736526d",
+      "usage": "Server dependency"
+    },
+    {
+      "name": "nodable-entities-LICENSE",
+      "package": "@nodable/entities",
+      "version": "2.2.0",
+      "url": "https://raw.githubusercontent.com/nodable/val-parsers/1a2c08a483b5b6428f1b3d01974875c97f3b3953/LICENSE",
+      "sha256": "750cb3fb6362804957ef52caaf9b5c824015be44d494637330d7cd8834d31d40",
+      "usage": "License for the upstream-bundled entity decoder"
+    }
+  ],
+  "sourceNotices": [
+    "Mediabunny 1.61.4 — MPL-2.0\nUpstream: https://github.com/Vanilagy/mediabunny\nOriginal source: https://registry.npmjs.org/mediabunny/-/mediabunny-1.61.4.tgz\nModified source files: web/licenses/mediabunny/adts-reader.js, mpeg-ts-demuxer.js, codec-data.js, conversion.js\nBuild modifications: web/build/vendor.js\nLicense text: web/licenses/mediabunny-LICENSE",
+    "Zag select, tooltip and vanilla 1.46.0 — MIT\nUpstream: https://github.com/chakra-ui/zag\nOriginal sources: the corresponding npm packages at version 1.46.0\nModified source files: web/licenses/zag-js/vanilla-machine.mjs, tooltip-machine.mjs\nBuild modifications: web/build/vendor.js\nLicense texts: web/licenses/zag-js/*-LICENSE"
+  ]
+}

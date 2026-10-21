@@ -1,0 +1,91 @@
+/* Shared app-owned controls and scrollbars; never style received BML contents. */
+.rx-select-button,
+.rx-icon,
+.rx-action,
+.rx-data-remote button,
+body > #input button {
+  border: 1px solid var(--rx-line);
+  border-radius: var(--rx-radius-control);
+  color: var(--rx-text);
+  background: var(--rx-panel-2);
+}
+
+.rx-app
+  :where(
+    .rx-select-button,
+    .rx-icon,
+    .rx-action,
+    .rx-channel,
+    .rx-volume-slider,
+    .rx-data-remote button
+  ):enabled:hover,
+body > #input button:enabled:hover {
+  border-color: var(--rx-control-hover-border);
+  background: var(--rx-control-hover);
+}
+
+/* Control states are shared by every app-owned control, including popovers. */
+.rx-app :where(button, input, summary):focus-visible,
+body > #input :where(button, input):focus-visible {
+  outline: 2px solid var(--rx-focus-ring);
+  outline-offset: 2px;
+}
+.rx-select-option:focus-visible {
+  outline-offset: -2px;
+}
+.rx-app
+  button:is(
+    .rx-select-button,
+    .rx-icon,
+    .rx-action,
+    .rx-primary,
+    .rx-channel,
+    .rx-select-option,
+    .rx-data-remote button
+  ):disabled,
+body > #input button:disabled {
+  cursor: not-allowed;
+  color: var(--rx-control-disabled-text);
+  border-color: var(--rx-control-disabled-border);
+  background: var(--rx-control-disabled-bg);
+  opacity: var(--rx-control-disabled-opacity);
+}
+
+/* Scrollbars */
+html,
+body,
+.rx-app,
+.rx-app * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rx-scrollbar-thumb) var(--rx-scrollbar-track);
+}
+
+@supports selector(::-webkit-scrollbar) {
+  html,
+  body,
+  .rx-app,
+  .rx-app * {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+
+  :is(html, body, .rx-app, .rx-app *)::-webkit-scrollbar {
+    width: var(--rx-scrollbar-size);
+    height: var(--rx-scrollbar-size);
+  }
+
+  :is(html, body, .rx-app, .rx-app *)::-webkit-scrollbar-track,
+  :is(html, body, .rx-app, .rx-app *)::-webkit-scrollbar-corner {
+    background: var(--rx-scrollbar-track);
+  }
+
+  :is(html, body, .rx-app, .rx-app *)::-webkit-scrollbar-thumb {
+    border: 2px solid var(--rx-scrollbar-track);
+    border-radius: 8px;
+    background: var(--rx-scrollbar-thumb);
+  }
+
+  :is(html, body, .rx-app, .rx-app *)::-webkit-scrollbar-thumb:hover {
+    background: var(--rx-scrollbar-hover);
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "1seg-receiver",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node ../server.js",
+    "build:sdr": "node build/vendor.js sdr",
+    "build:si": "node build/vendor.js si",
+    "build:caption": "node build/vendor.js caption",
+    "build:data": "node build/vendor.js data",
+    "format": "prettier --write \"src/**/*.js\" \"build/**/*.js\" \"*.css\" \"../server.js\"",
+    "format:check": "prettier --check \"src/**/*.js\" \"build/**/*.js\" \"*.css\" \"../server.js\"",
+    "build:signals": "node build/vendor.js signals",
+    "build:viterbi": "node build/vendor.js viterbi",
+    "build:rs": "node build/vendor.js ezpwd",
+    "build:media": "node build/vendor.js media",
+    "build:comlink": "node build/vendor.js comlink",
+    "build": "node build/vendor.js",
+    "build:assets": "node build/assets.js",
+    "build:fonts": "node build/assets.js fonts",
+    "build:logos": "node build/assets.js logos",
+    "build:licenses": "node build/vendor.js licenses",
+    "build:si-text": "node build/vendor.js si-text",
+    "build:select": "node build/vendor.js select",
+    "download:logos": "node build/logos.js"
+  },
+  "dependencies": {
+    "@jtarrio/signals": "0.10.1",
+    "@jtarrio/webrtlsdr": "3.0.6",
+    "@zag-js/select": "1.46.0",
+    "@zag-js/tooltip": "1.46.0",
+    "@zag-js/vanilla": "1.46.0",
+    "arib-mmt-tlv-ts": "2.0.2",
+    "aribb24.js": "2.0.26",
+    "comlink": "4.4.2",
+    "mediabunny": "1.61.4",
+    "web-bml": "1.0.1"
+  },
+  "devDependencies": {
+    "@yowasp/clang": "22.0.0-git20542-10",
+    "esbuild": "0.28.2",
+    "prettier": "3.6.2"
+  },
+  "overrides": {
+    "fast-xml-parser": "5.7.0"
+  }
+}
