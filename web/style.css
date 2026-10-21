@@ -993,6 +993,12 @@ svg.lucide {
   margin-top: 22px;
 }
 
+.rx-source-link {
+  color: var(--rx-accent);
+  font-size: var(--rx-font-control);
+  text-underline-offset: 3px;
+}
+
 .rx-setting-check {
   display: flex;
   align-items: center;

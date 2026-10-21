@@ -25,7 +25,7 @@ body > #input button:enabled:hover {
 }
 
 /* Control states are shared by every app-owned control, including popovers. */
-.rx-app :where(button, input, summary):focus-visible,
+.rx-app :where(button, input, summary, a):focus-visible,
 body > #input :where(button, input):focus-visible {
   outline: 2px solid var(--rx-focus-ring);
   outline-offset: 2px;

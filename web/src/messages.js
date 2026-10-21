@@ -502,6 +502,7 @@ export const messages = {
     right: '右',
     down: '下',
     closeSettings: '設定を閉じる',
+    sourceCode: 'ソースコード',
     chooseInput: '入力を選択',
     chooseIqFormat: 'IQファイルの形式を選択',
     iqFileFormat: 'IQファイルの形式',
