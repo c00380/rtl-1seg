@@ -1,6 +1,6 @@
 # libfec Viterbi27
 
-`viterbi27_port.c`と`fec.h`は[quiet/libfec 9750ca0a6d0a786b506e44692776b541f90daa91](https://github.com/quiet/libfec/tree/9750ca0a6d0a786b506e44692776b541f90daa91)の原本です（Phil Karn、LGPL 2.1）。ライセンスは`../../licenses/libfec-LICENSE`。
+`viterbi27_port.c`と`fec.h`は[quiet/libfec 9750ca0a6d0a786b506e44692776b541f90daa91](https://github.com/quiet/libfec/tree/9750ca0a6d0a786b506e44692776b541f90daa91)の原本です（Phil Karn、LGPL 2.1）。ライセンスは[LGPL-2.1全文](./libfec-LICENSE)。
 
 `adapter.c`（GPL-3.0-or-later）はビット順、開始状態、信頼度の8bit変換（倍率64）、メトリック正規化、96段の連続履歴と終端なしのトレースバックを接続します。libfecの分岐計算・経路選択は変更していません。RS用ソース・APIは含めません。
 

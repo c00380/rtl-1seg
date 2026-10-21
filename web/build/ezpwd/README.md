@@ -1,6 +1,6 @@
 # EZPWD Reed-Solomon
 
-固定ソースは[pjkundert/ezpwd-reed-solomon commit 62a490c13f6e057fbf2dc6777fde234c7a19098e](https://github.com/pjkundert/ezpwd-reed-solomon/tree/62a490c13f6e057fbf2dc6777fde234c7a19098e)です。`ezpwd/rs`・`ezpwd/rs_base`は原本で、ハッシュは`SOURCE.json`に記録しています。上流の[ライセンス案内](../../licenses/ezpwd-LICENSE)・[GPLv3全文](../../licenses/ezpwd-COPYING)を同梱します。`rs_base`のPhil Karn由来部分はLGPLで、既存の[LGPL-2.1全文](../../licenses/libfec-LICENSE)も配布します。アダプターはGPL-3.0-or-laterです。
+固定ソースは[pjkundert/ezpwd-reed-solomon commit 62a490c13f6e057fbf2dc6777fde234c7a19098e](https://github.com/pjkundert/ezpwd-reed-solomon/tree/62a490c13f6e057fbf2dc6777fde234c7a19098e)です。`ezpwd/rs`・`ezpwd/rs_base`は原本で、ハッシュは`SOURCE.json`に記録しています。上流の[ライセンス案内](./ezpwd-LICENSE)・[GPLv3全文](./ezpwd-COPYING)を同梱します。`rs_base`のPhil Karn由来部分はLGPLで、既存の[LGPL-2.1全文](../libfec/libfec-LICENSE)も配布します。アダプターはGPL-3.0-or-laterです。
 
 `adapter.cpp`はGF(256)、原始多項式0x11d、生成根0〜15、パリティ16バイトでEZPWDを初期化します。188バイトを符号化することで、RS(255,239)を先頭51バイト短縮したRS(204,188)になります。一般的な`RS<255,239>`の既定生成根1は使いません。符号化・訂正・パリティによる検査はライブラリが担当し、根0のXORによる早期棄却と、訂正した場合の再検査を接続します。JS側で入力をコピーし、返却用204バイト配列を再利用します。
 
