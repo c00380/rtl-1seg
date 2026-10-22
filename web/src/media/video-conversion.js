@@ -8,6 +8,8 @@ import {
   MpegTsOutputFormat,
   Conversion,
   Quality,
+  canEncodeAudio,
+  registerAacEncoder,
 } from '../../vendor/mediabunny.js';
 import { transportBitrate } from '../dsp/modulator.js';
 
@@ -36,6 +38,15 @@ export async function convertVideo(
     );
     const videoQuality = new Quality({ bitrate: videoBitrate, bitrateMode: 'constant' });
     const audioQuality = new Quality({ bitrate: 48000 });
+    if (
+      audio &&
+      !(await canEncodeAudio('aac', {
+        sampleRate: 48000,
+        numberOfChannels: 2,
+        quality: audioQuality,
+      }))
+    )
+      registerAacEncoder();
     abort();
     output = new Output({
       format: new MpegTsOutputFormat(),

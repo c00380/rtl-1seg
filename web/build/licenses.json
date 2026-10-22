@@ -53,10 +53,17 @@
       "url": "https://raw.githubusercontent.com/nodable/val-parsers/1a2c08a483b5b6428f1b3d01974875c97f3b3953/LICENSE",
       "sha256": "750cb3fb6362804957ef52caaf9b5c824015be44d494637330d7cd8834d31d40",
       "usage": "License for the upstream-bundled entity decoder"
+    },
+    {
+      "name": "aac-encoder-FFmpeg-LICENSE",
+      "url": "https://raw.githubusercontent.com/quiet/libfec/9750ca0a6d0a786b506e44692776b541f90daa91/lesser.txt",
+      "sha256": "0b62e767be034b3fe9c6baea15592459ca7fa9fcf060e48b80a3b0b361b8288b",
+      "usage": "FFmpeg AAC WASM / LGPL-2.1-or-later license text"
     }
   ],
   "sourceNotices": [
     "Mediabunny 1.61.4 — MPL-2.0\nUpstream: https://github.com/Vanilagy/mediabunny\nOriginal source: https://registry.npmjs.org/mediabunny/-/mediabunny-1.61.4.tgz\nModified source files: web/licenses/mediabunny/adts-reader.js, mpeg-ts-demuxer.js, codec-data.js, conversion.js\nBuild modifications: web/build/vendor.js\nLicense text: web/licenses/mediabunny-LICENSE",
-    "Zag select, tooltip and vanilla 1.46.0 — MIT\nUpstream: https://github.com/chakra-ui/zag\nOriginal sources: the corresponding npm packages at version 1.46.0\nModified source files: web/licenses/zag-js/vanilla-machine.mjs, tooltip-machine.mjs\nBuild modifications: web/build/vendor.js\nLicense texts: web/licenses/zag-js/*-LICENSE"
+    "Zag select, tooltip and vanilla 1.46.0 — MIT\nUpstream: https://github.com/chakra-ui/zag\nOriginal sources: the corresponding npm packages at version 1.46.0\nModified source files: web/licenses/zag-js/vanilla-machine.mjs, tooltip-machine.mjs\nBuild modifications: web/build/vendor.js\nLicense texts: web/licenses/zag-js/*-LICENSE",
+    "@mediabunny/aac-encoder 1.62.0 — MPL-2.0; embedded FFmpeg AAC encoder — LGPL-2.1-or-later\nUpstream: https://github.com/Vanilagy/mediabunny/tree/main/packages/aac-encoder\nPublished package: https://registry.npmjs.org/@mediabunny/aac-encoder/-/aac-encoder-1.62.0.tgz\nBuild instructions: README.md in the published package\nFFmpeg source: https://ffmpeg.org/download.html\nLicense texts: mediabunny-aac-encoder-LICENSE, aac-encoder-FFmpeg-LICENSE"
   ]
 }

@@ -27,6 +27,7 @@
   "dependencies": {
     "@jtarrio/signals": "0.10.1",
     "@jtarrio/webrtlsdr": "3.0.6",
+    "@mediabunny/aac-encoder": "1.62.0",
     "@zag-js/select": "1.46.0",
     "@zag-js/tooltip": "1.46.0",
     "@zag-js/vanilla": "1.46.0",

@@ -269,7 +269,7 @@ const targets = {
   },
   media: {
     source:
-      "export { Input, MPEG_TS, ALL_FORMATS, BlobSource, ReadableStreamSource, EncodedPacketSink, EncodedVideoPacketSource, EncodedAudioPacketSource, VideoSampleSink, AudioSampleSink, Output, StreamTarget, BufferTarget, MpegTsOutputFormat, WebMOutputFormat, Mp4OutputFormat, VideoSampleSource, AudioSampleSource, CanvasSource, MediaStreamAudioTrackSource, AudioSample, Quality, canEncodeVideo, canEncodeAudio, Conversion } from 'mediabunny';\n// Build-only reference to the pinned internal SPS parser, shared with the demuxer.\nexport { parseAvcSps } from './node_modules/mediabunny/dist/modules/src/codec-data.js';\n",
+      "export { Input, MPEG_TS, ALL_FORMATS, BlobSource, ReadableStreamSource, EncodedPacketSink, EncodedVideoPacketSource, EncodedAudioPacketSource, VideoSampleSink, AudioSampleSink, Output, StreamTarget, BufferTarget, MpegTsOutputFormat, WebMOutputFormat, Mp4OutputFormat, VideoSampleSource, AudioSampleSource, CanvasSource, MediaStreamAudioTrackSource, AudioSample, Quality, canEncodeVideo, canEncodeAudio, Conversion } from 'mediabunny';\n// Build-only reference to the pinned internal SPS parser, shared with the demuxer.\nexport { parseAvcSps } from './node_modules/mediabunny/dist/modules/src/codec-data.js';\nexport { registerAacEncoder } from '@mediabunny/aac-encoder';\n",
     output: 'mediabunny',
     plugin: 'corrections',
   },
