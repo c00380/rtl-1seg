@@ -144,7 +144,6 @@ export const messages = {
     failed: 'IQ生成に失敗しました。',
     videoProgress: (percent) => `動画を変換中 · ${percent}%`,
     iqProgress: (progress, seconds) => `IQを生成中 · ${progress}${seconds}秒`,
-    committing: '保存を完了しています…',
     complete: (seconds, mebibytes) => `生成完了 · 保存しました · ${seconds}秒 · ${mebibytes} MiB`,
     noVideo: '動画の映像トラックが見つかりません。',
     cleanupFailed: 'IQ生成用の一時ファイルを削除できませんでした。',

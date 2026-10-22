@@ -32,7 +32,7 @@ export function recordingFilename(name, date) {
       .slice(0, 80) || messages.recording.defaultName;
   return `${title}_${stamp}.ts`;
 }
-export function downloadRecording(blob, filename) {
+export function downloadBlob(blob, filename) {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
@@ -67,7 +67,7 @@ export class Recording {
     onState = () => {},
     onError = () => {},
     onSaved = () => {},
-    download = downloadRecording,
+    download = downloadBlob,
     convert = convertRecording,
     createStorage = createRecordingStorage,
     now = () => performance.now(),

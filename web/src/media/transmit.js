@@ -1,5 +1,6 @@
 import { messages } from '../messages.js';
-// The worker generates IQ; this thread owns and commits the selected file.
+import { downloadBlob } from './recording.js';
+// The worker generates IQ; this thread collects chunks for a browser download.
 export function installTransmit(app) {
   const dialog = app.querySelector('.rx-transmit-modal');
   const button = app.querySelector('.rx-transmit-button');
@@ -99,20 +100,9 @@ export function installTransmit(app) {
     active = true;
     cancelled = false;
     controls();
-    let output,
-      temporaryName,
-      saved = false;
+    const chunks = [];
+    let temporaryName;
     try {
-      // Keep the picker in the submit gesture, before any asynchronous work.
-      const destination = await globalThis.showSaveFilePicker({
-        suggestedName: video.name.replace(/\.[^.]+$/, '') + '.iq',
-        types: [
-          { description: messages.common.iqFile, accept: { 'application/octet-stream': ['.iq'] } },
-        ],
-      });
-      if (cancelled) throw new DOMException(messages.encoding.cancelled, 'AbortError');
-      output = await destination.createWritable();
-      if (cancelled) throw new DOMException(messages.encoding.cancelled, 'AbortError');
       temporaryName = `1seg-convert-${crypto.randomUUID()}.ts`;
       status.textContent = messages.encoding.readingVideo;
       const result = await new Promise((resolve, reject) => {
@@ -130,7 +120,7 @@ export function installTransmit(app) {
           }
           try {
             if (data.type === 'write') {
-              await output.write(data.bytes);
+              chunks.push(data.bytes);
               if (!cancelled) worker?.postMessage({ type: 'written' });
             } else if (data.type === 'complete') resolve(data.result);
             else if (data.type === 'error') reject(new Error(data.text));
@@ -152,12 +142,12 @@ export function installTransmit(app) {
         worker.postMessage({ type: 'generate', file: video, settings, name: temporaryName });
       });
       if (cancelled) throw new DOMException(messages.encoding.cancelled, 'AbortError');
-      // Closing commits the file; disable cancellation during this final operation.
       $('transmit-cancel').disabled = true;
       rejectGeneration = null;
-      status.textContent = messages.encoding.committing;
-      await output.close();
-      saved = true;
+      downloadBlob(
+        new Blob(chunks, { type: 'application/octet-stream' }),
+        video.name.replace(/\.[^.]+$/, '') + '.iq',
+      );
       status.textContent = messages.encoding.complete(
         result.durationSeconds.toFixed(2),
         (result.bytes / 1048576).toFixed(1),
@@ -171,7 +161,7 @@ export function installTransmit(app) {
       worker?.terminate();
       worker = null;
       rejectGeneration = null;
-      if (!saved) await output?.abort().catch(() => {});
+      chunks.length = 0;
       if (temporaryName) {
         try {
           const root = await navigator.storage.getDirectory();
